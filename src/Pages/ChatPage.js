@@ -1,10 +1,10 @@
 import axios from "axios"
-import  { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const ChatPage = () => {
-    const [chats , setChats] = useState([]);
+    const [chats, setChats] = useState([]);
     const fetchChats = async () => {
-        const data = await axios.get("/api/chat");
+        const { data } = await axios.get("/api/chat");
 
         setChats(data);
     };
@@ -14,8 +14,15 @@ const ChatPage = () => {
     }, []);
 
     return (
-        {chats}
+        <div>
+            {chats.map(chat => (
+                <div key={chat._id}>
+                    {chat.chatName}
+                </div>))}
+        </div>
+
+
     )
 }
 
-export default ChatPage
+export default ChatPage;
